@@ -191,7 +191,7 @@
                     </execution>
                 </executions>
             </plugin>
-                <!--
+          
             <plugin>
 
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
@@ -214,8 +214,7 @@
                     <value>${project.version}</value>
                 </configuration>
             </plugin>
-                -->
-
+          
             <plugin><!-- Using jdk 1.5.0_22, package-info.java files are compiled correctly. -->
                 <!--
                 java compiler plugin forked in extra process
@@ -260,16 +259,19 @@
                     </execution>
                 </executions>
             </plugin>
-              <!--
+           
             <plugin>
+                  <!--
                 A plugin which uses the JUnit framework in order to start
                 our junit suite "AllTests" after the sources are compiled.
+                -->
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefireVersion}</version>
                 <configuration>
                     <test>org/junit/tests/AllTests.java</test>
                     <useSystemClassLoader>true</useSystemClassLoader>
                     <enableAssertions>false</enableAssertions>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -279,7 +281,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-             -->
+             
             <plugin>
                 <!--
                 This plugin can package the main artifact's sources (src/main/java)
@@ -384,7 +386,14 @@
     </build>
 
     <reporting>
-        <plugins>
+        
+		    <plugins>
+		     <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		       <artifactId>maven-pmd-plugin</artifactId>
+		      <version>3.8</version>
+		   </plugin>
+		         
             <plugin>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>2.8</version>
